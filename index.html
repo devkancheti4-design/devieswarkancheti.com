@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Devieswar Kancheti</title>
+<meta name="description" content="Devieswar Kancheti builds AI tools and proves them. Founder of Model D and Face Law Labs, contributor to Graphify's core and claude-mem. Papers, results and open-source work in one place.">
+<meta name="author" content="Devieswar Kancheti">
+<link rel="canonical" href="https://devieswarkancheti.com/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Devieswar Kancheti">
+<meta property="og:description" content="I build AI tools. Then I prove them.">
+<meta property="og:url" content="https://devieswarkancheti.com/">
+<meta property="og:image" content="https://devieswarkancheti.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Devieswar Kancheti. I build AI tools. Then I prove them. A brass plumb line hangs on a black stage.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="fonts/atkinson-mono.woff2" as="font" type="font/woff2" crossorigin>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Devieswar Kancheti",
+  "url": "https://devieswarkancheti.com/",
+  "description": "Builds AI tools and proves them. Founder of Model D and Face Law Labs. Contributor to Graphify and claude-mem.",
+  "affiliation": { "@type": "CollegeOrUniversity", "name": "SRM University AP" },
+  "sameAs": [
+    "https://github.com/devkancheti4-design",
+    "https://www.linkedin.com/in/devieswar-kancheti"
+  ]
+}
+</script>
+<script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");</script>
+<style>
+/* Layout: a keynote on a black stage. One idea per screen, a brass plumb line hanging over all of it, one sheet of white paper for the papers. */
+@font-face { font-family: "Atkinson Next"; src: url("fonts/atkinson-next.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+@font-face { font-family: "Atkinson Mono"; src: url("fonts/atkinson-mono.woff2") format("woff2"); font-weight: 400 600; font-display: swap; }
+
+:root {
+  --stage: #000;
+  --ink: #f5f5f7;
+  --dim: #86868b;
+  --unlit: #5c5c61;
+  --tile: #141416;
+  --tile-up: #1d1d1f;
+  --track: #2c2c2e;
+  --link: #2997ff;
+  --brass: #d6b26c;
+  --paper: #f5f5f7;
+  --paper-ink: #1d1d1f;
+  --paper-dim: #6e6e73;
+  --paper-rule: #d2d2d7;
+  --paper-link: #0066cc;
+  --text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Google Sans Text", "Segoe UI Variable Text", "Segoe UI", Roboto, "Atkinson Next", sans-serif;
+  --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Google Sans", "Segoe UI Variable Display", "Segoe UI", Roboto, "Atkinson Next", sans-serif;
+  --mono: "Atkinson Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 3.25rem; }
+.motion { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--stage);
+  color: var(--ink);
+  font: 400 1.0625rem/1.47 var(--text);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: .14em; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: .25rem; }
+h1, h2, h3, p, figure, pre { margin: 0; }
+p { text-wrap: pretty; }
+::selection { background: var(--brass); color: #000; }
+.dim { color: var(--dim); }
+.wrap {
+  width: min(78rem, 100%);
+  margin-inline: auto;
+  padding-left: max(clamp(1.25rem, 4vw, 3rem), env(safe-area-inset-left, 0px));
+  padding-right: max(clamp(2rem, 5vw, 4rem), env(safe-area-inset-right, 0px));
+}
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 1rem; top: .5rem; z-index: 80; background: var(--ink); color: #000; padding: .4rem .8rem; border-radius: .5rem; }
+
+/* global bar */
+.bar-top {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(0, 0, 0, .72);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+.bar-top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 2.75rem; font-size: .8125rem; }
+.bar-top a { color: #d6d6db; }
+.bar-top a:hover { color: #fff; text-decoration: none; }
+.bar-top .name { font-weight: 600; color: var(--ink); white-space: nowrap; }
+.bar-top nav { display: flex; gap: clamp(.9rem, 2.4vw, 2rem); }
+
+/* the plumb line */
+#pl-line, #pl-bob, #pl-tag { position: fixed; left: 0; top: 0; }
+#pl-line { z-index: 40; width: 1px; height: 1px; background: #fff; transform-origin: 0 0; mix-blend-mode: difference; pointer-events: none; will-change: transform; }
+#pl-bob { z-index: 41; width: 24px; height: 58px; transform-origin: 12px 0; touch-action: none; user-select: none; -webkit-user-select: none; will-change: transform; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .55)); }
+.motion #pl-bob { cursor: grab; }
+.motion #pl-bob.held { cursor: grabbing; }
+#pl-bob::after { content: ""; position: absolute; inset: -14px -18px; }
+#pl-bob svg { display: block; }
+#pl-tag { z-index: 41; width: 10.5rem; text-align: right; font: 400 .75rem/1.3 var(--mono); color: var(--brass); opacity: 0; transition: opacity .35s; pointer-events: none; }
+#pl-tag.show { opacity: 1; }
+
+/* hero */
+.hero {
+  position: relative;
+  min-height: min(calc(100svh - 2.75rem), 58rem);
+  display: flex; align-items: flex-end;
+  padding-block: 6rem clamp(2.5rem, 6vw, 4.5rem);
+  background: radial-gradient(56rem 36rem at 84% 30%, rgba(214, 178, 108, .14), transparent 70%);
+}
+h1 { font: 700 clamp(3.75rem, 14.4vw, 14rem)/.9 var(--display); letter-spacing: -.042em; }
+h1 span { display: block; }
+.thesis { margin-top: clamp(1.25rem, 3vw, 2.25rem); font: 600 clamp(1.625rem, 4.1vw, 3.5rem)/1.08 var(--display); letter-spacing: -.026em; }
+.who { margin-top: 1.1rem; max-width: 39rem; color: var(--dim); font-size: clamp(1rem, 1.4vw, 1.1875rem); }
+.who a { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .16em; }
+.motion .hero h1 span, .motion .thesis, .motion .who { animation: rise 1s var(--ease) both; }
+.motion .hero h1 span + span { animation-delay: .08s; }
+.motion .thesis { animation-delay: .24s; }
+.motion .who { animation-delay: .38s; }
+@keyframes rise { from { opacity: 0; transform: translateY(.22em); filter: blur(8px); } to { opacity: 1; transform: none; filter: none; } }
+
+/* the case */
+.manifesto { padding-block: clamp(6rem, 15vw, 13rem) clamp(5rem, 11vw, 9rem); }
+.manifesto p { max-width: 64rem; font: 600 clamp(1.875rem, 5.2vw, 4.5rem)/1.1 var(--display); letter-spacing: -.028em; }
+.manifesto a { color: inherit; text-decoration: underline; text-decoration-thickness: .05em; text-underline-offset: .12em; }
+.w { color: var(--unlit); transition: color .35s; }
+.w.on { color: var(--ink); }
+
+/* type */
+.eyebrow { margin-bottom: .7rem; font: 600 clamp(1.0625rem, 1.7vw, 1.375rem) var(--display); color: var(--ink); }
+.head { font: 700 clamp(2.5rem, 6.8vw, 6.25rem)/1.03 var(--display); letter-spacing: -.038em; text-wrap: balance; max-width: 15em; }
+.head .dim { display: block; }
+.lede { margin-top: clamp(1.1rem, 2vw, 1.75rem); max-width: 42rem; color: var(--dim); font-size: clamp(1.1875rem, 1.9vw, 1.625rem); line-height: 1.32; font-weight: 500; }
+.lede b { color: var(--ink); font-weight: 600; }
+.big { display: block; font: 700 clamp(5rem, 19vw, 16rem)/.94 var(--display); letter-spacing: -.056em; font-variant-numeric: tabular-nums; }
+.big a { color: var(--ink); }
+.big a:hover { color: var(--link); text-decoration: none; }
+.big small { font-size: .42em; letter-spacing: -.02em; font-weight: 600; margin-left: .05em; }
+.big-note { margin-top: clamp(.6rem, 1.2vw, 1.1rem); max-width: 34rem; font-size: clamp(1.0625rem, 1.5vw, 1.3125rem); line-height: 1.35; color: var(--dim); font-weight: 500; }
+.big-note b { color: var(--ink); font-weight: 600; }
+.limit { margin-top: clamp(1.75rem, 3vw, 2.5rem); max-width: 42rem; color: var(--dim); }
+.limit b { color: var(--ink); font-weight: 600; }
+.more { display: flex; flex-wrap: wrap; gap: .4rem 1.75rem; margin-top: 1.25rem; font-size: clamp(1.0625rem, 1.5vw, 1.25rem); }
+
+/* chapters */
+.ch { padding-block: clamp(5rem, 11vw, 9.5rem); }
+.exhibit { margin-top: clamp(2.5rem, 5vw, 4.5rem); }
+.score { margin-top: clamp(2.75rem, 6vw, 5.5rem); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: clamp(1.75rem, 3vw, 3rem); margin-top: clamp(2rem, 4vw, 3.5rem); }
+.stat b { display: block; font: 700 clamp(2.25rem, 4.4vw, 3.75rem)/1 var(--display); letter-spacing: -.035em; font-variant-numeric: tabular-nums; }
+.stat p { margin-top: .5rem; color: var(--dim); max-width: 22rem; }
+
+/* tiles */
+.tiles { display: grid; gap: .875rem; }
+.tile { background: var(--tile); border-radius: 1.625rem; padding: clamp(1.5rem, 2.8vw, 2.5rem); min-width: 0; }
+.four { grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr)); margin-top: clamp(2.25rem, 4.5vw, 4rem); }
+.two { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 48rem) { .two { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tile .who-says { font-size: .9375rem; color: var(--dim); font-weight: 500; }
+.refusal { display: block; margin-top: 2.5rem; font: 500 clamp(1.5rem, 2.5vw, 2.125rem)/1.12 var(--mono); color: var(--brass); }
+.tile .why { margin-top: .6rem; color: var(--dim); font-size: 1rem; }
+
+/* PLUMB's real output */
+.io { display: flex; flex-direction: column; gap: 1.1rem; }
+.io .label { font-size: .875rem; color: var(--dim); font-weight: 500; }
+.io pre { margin-top: .4rem; font: 400 clamp(.8125rem, 1.15vw, .9375rem)/1.55 var(--mono); color: var(--ink); overflow-x: auto; }
+.io .out { color: var(--brass); }
+.io .cont { display: block; white-space: pre-wrap; overflow-wrap: anywhere; padding-left: 8ch; text-indent: -8ch; }
+.io .silent { display: block; margin-top: .25rem; font: 500 clamp(1.75rem, 3vw, 2.5rem)/1.1 var(--mono); color: var(--brass); }
+.io .why { color: var(--dim); }
+.caption { margin-top: .9rem; color: var(--dim); font-size: .875rem; }
+
+/* video */
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: .875rem; }
+.pair figure { min-width: 0; }
+.pair video { display: block; width: 100%; aspect-ratio: 1280 / 916; object-fit: cover; border-radius: 1.25rem; background: var(--tile); }
+.pair figcaption { margin-top: .6rem; font-size: .9375rem; color: var(--dim); }
+.pair figcaption b { color: var(--ink); font-weight: 600; }
+.toggle { margin-top: .75rem; background: var(--tile-up); color: var(--ink); border: 0; border-radius: 99rem; padding: .35rem .9rem; font: 500 .8125rem var(--text); cursor: pointer; }
+
+/* bars */
+.bars-title { font-weight: 600; font-size: clamp(1.0625rem, 1.5vw, 1.25rem); }
+.bars { display: grid; gap: 1.1rem; margin-top: 1.25rem; }
+.bar-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .35rem 1rem; align-items: baseline; }
+.bar-row > span { color: var(--dim); }
+.bar-row.me > span { color: var(--ink); font-weight: 600; }
+.bar-row > b { font: 500 .9375rem var(--mono); color: var(--dim); }
+.bar-row.me > b { color: var(--ink); }
+.track { grid-column: 1 / -1; height: .6875rem; border-radius: 99rem; background: var(--tile-up); overflow: hidden; }
+.track i { display: block; height: 100%; width: var(--v); min-width: .6875rem; border-radius: 99rem; background: #5c5c61; transform-origin: left; transition: transform 1.3s var(--ease); }
+.bar-row.me .track i { background: var(--ink); }
+.motion .bars:not(.in) .track i { transform: scaleX(0); }
+
+/* chart */
+.chart { margin-top: 1rem; overflow-x: auto; }
+.chart svg { display: block; width: 100%; height: auto; }
+.chart .small { display: none; }
+.chart .grid { stroke: var(--track); stroke-width: 1; }
+.chart text { font: 400 13px var(--mono); fill: var(--dim); }
+.chart .lab-me { fill: var(--ink); font-weight: 500; }
+.series { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 1.6s var(--ease); }
+.s-alone { stroke: var(--dim); }
+.s-me { stroke: var(--ink); }
+.dot-alone { fill: var(--dim); }
+.dot-me { fill: var(--ink); }
+.chart circle, .chart .end { transition: opacity .6s .9s; }
+.motion .chart:not(.in) .series { stroke-dashoffset: 1; }
+.motion .chart:not(.in) circle, .motion .chart:not(.in) .end { opacity: 0; }
+
+/* open source */
+.star { display: block; margin-top: 1.75rem; font: 700 clamp(3.25rem, 7vw, 6rem)/.95 var(--display); letter-spacing: -.045em; }
+.star small { display: block; margin-top: .4em; font-size: .24em; line-height: 1.2; letter-spacing: -.005em; font-weight: 500; color: var(--dim); }
+.tile h3 { font: 600 clamp(1.25rem, 2vw, 1.75rem)/1.15 var(--display); letter-spacing: -.015em; }
+.tile .body { margin-top: 1rem; color: var(--dim); }
+.tile .body b { color: var(--ink); font-weight: 600; }
+.tile code { font: 400 .92em var(--mono); color: var(--ink); }
+.tile .more { font-size: 1rem; gap: .3rem 1.1rem; }
+.tile.wide { grid-column: 1 / -1; }
+.chip { display: inline-block; margin-top: .7rem; padding: .22rem .7rem; border-radius: 99rem; background: var(--tile-up); color: var(--ink); font-size: .8125rem; font-weight: 500; }
+
+/* papers: the one white sheet */
+.sheet { background: var(--paper); color: var(--paper-ink); padding-block: clamp(5rem, 10vw, 8.5rem); color-scheme: light; }
+.sheet .head { color: var(--paper-ink); }
+.sheet a { color: var(--paper-link); }
+.sheet .all { margin-top: 1rem; font-size: clamp(1.0625rem, 1.5vw, 1.25rem); }
+.papers { margin-top: clamp(2.25rem, 4vw, 3.5rem); border-bottom: 1px solid var(--paper-rule); }
+.paper { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: .3rem 1.5rem; padding-block: 1.35rem; border-top: 1px solid var(--paper-rule); }
+.paper time { font: 400 .875rem/1.8 var(--mono); color: var(--paper-dim); }
+.paper a { display: block; font: 600 clamp(1.125rem, 1.9vw, 1.5rem)/1.2 var(--display); letter-spacing: -.012em; color: var(--paper-ink); }
+.paper a:hover { color: var(--paper-link); text-decoration: none; }
+.paper p { margin-top: .35rem; color: var(--paper-dim); font: 400 .875rem/1.5 var(--mono); overflow-wrap: anywhere; }
+
+/* also built */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr)); gap: .75rem; margin-top: clamp(2rem, 4vw, 3.25rem); }
+.card { display: block; min-width: 0; padding: 1.35rem 1.5rem; border-radius: 1.25rem; background: var(--tile); color: var(--ink); transition: transform .35s var(--ease), background .25s; }
+.card:hover { background: var(--tile-up); text-decoration: none; }
+.motion .card:hover { transform: scale(1.015); }
+.card b { display: block; font-weight: 600; }
+.card span { display: block; margin-top: .2rem; color: var(--dim); font-size: .9375rem; line-height: 1.38; }
+
+/* end */
+.end-note { padding-block: clamp(6rem, 13vw, 11rem) clamp(3rem, 5vw, 4rem); }
+.end-note .mail { display: block; margin-top: 1rem; font: 700 clamp(1.625rem, 5.4vw, 4.75rem)/1.05 var(--display); letter-spacing: -.035em; color: var(--link); overflow-wrap: anywhere; }
+.elsewhere { display: flex; flex-wrap: wrap; gap: .4rem 1.75rem; margin-top: 1.75rem; font-size: clamp(1.0625rem, 1.5vw, 1.25rem); }
+.motto { margin-top: clamp(3.5rem, 8vw, 6.5rem); font: 400 .875rem/1.5 var(--mono); color: var(--brass); text-wrap: balance; }
+.fine { margin-top: .5rem; color: var(--dim); font-size: .8125rem; }
+
+@media (max-width: 40rem) {
+  .bar-top nav a.opt { display: none; }
+  .paper { grid-template-columns: minmax(0, 1fr); }
+  h1 { font-size: 19vw; }
+  .thesis .dim { display: block; }
+  .chart .large { display: none; }
+  .chart .small { display: block; }
+}
+@supports (animation-timeline: view()) {
+  .motion .big { animation: zoom linear both; animation-timeline: view(); animation-range: entry 0% cover 38%; transform-origin: left center; }
+  @keyframes zoom { from { opacity: .2; transform: scale(.84); } to { opacity: 1; transform: none; } }
+}
+</style>
+<noscript><style>#pl-line, #pl-bob, #pl-tag { display: none; }</style></noscript>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="bar-top">
+  <div class="wrap">
+    <a class="name" href="#main">Devieswar Kancheti</a>
+    <nav aria-label="Sections">
+      <a class="opt" href="#work">Work</a>
+      <a class="opt" href="#open-source">Open source</a>
+      <a href="#papers">Papers</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<!-- The plumb line. It is a real pendulum: drag the bob and it swings under gravity, then settles true. -->
+<div id="pl-line" aria-hidden="true"></div>
+<div id="pl-bob" aria-hidden="true">
+  <svg width="24" height="58" viewBox="0 0 24 58">
+    <defs>
+      <linearGradient id="brass" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#6d5322"/><stop offset=".2" stop-color="#b8924b"/><stop offset=".44" stop-color="#f6e4b6"/><stop offset=".62" stop-color="#cfa85f"/><stop offset="1" stop-color="#5a4419"/>
+      </linearGradient>
+    </defs>
+    <rect x="10" y="0" width="4" height="5" rx="1" fill="url(#brass)"/>
+    <rect x="6" y="5" width="12" height="9" rx="1.6" fill="url(#brass)"/>
+    <path d="M3.4 15.2h17.2c.8 0 1.3.8 1 1.5L12.9 57a1 1 0 0 1-1.8 0L2.4 16.7c-.3-.7.2-1.5 1-1.5z" fill="url(#brass)"/>
+  </svg>
+</div>
+<div id="pl-tag" aria-hidden="true"></div>
+
+<main id="main">
+
+<header class="hero">
+  <div class="wrap">
+    <h1><span>Devieswar</span><span>Kancheti</span></h1>
+    <p class="thesis">I build AI tools. <span class="dim">Then I prove them.</span></p>
+    <p class="who">B.Tech CSE at SRM University AP, class of 2029. Founder of Model D and Face Law Labs. Contributor to <a href="#open-source">Graphify's core and claude-mem</a>.</p>
+  </div>
+</header>
+
+<section class="manifesto">
+  <div class="wrap">
+    <p id="case">By <a href="https://arxiv.org/abs/2211.04325">one estimate</a>, models will train on datasets as large as all public human text sometime between 2026 and 2032. After that, more of their training data will be written by other models, and someone has to check it. I build small, exact systems for that job. They run at no token cost.</p>
+  </div>
+</section>
+
+<section class="ch" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="head">When it can't prove the answer, <span class="dim">it says so.</span></h2>
+    <div class="tiles four">
+      <div class="tile"><span class="who-says">PLUMB</span><span class="refusal">silent</span><p class="why">The examples don't pin one program down.</p></div>
+      <div class="tile"><span class="who-says">AM</span><span class="refusal">CANNOT</span><p class="why">The clip follows no law it can stand behind.</p></div>
+      <div class="tile"><span class="who-says">Detect Law</span><span class="refusal">undecided</span><p class="why">The text doesn't settle it either way.</p></div>
+      <div class="tile"><span class="who-says">Face Law</span><span class="refusal">too dark to tell</span><p class="why">Below a proven light limit, it never guesses.</p></div>
+    </div>
+  </div>
+</section>
+
+<div id="work">
+
+<section class="ch" id="plumb">
+  <div class="wrap">
+    <p class="eyebrow">PLUMB</p>
+    <h2 class="head">Examples in. Exact code out. <span class="dim">Or silence.</span></h2>
+    <p class="lede">A model writes a few examples. PLUMB compiles them into a program with <b>no model inside</b>, and the program labels as many new inputs as you want for free.</p>
+
+    <div class="exhibit">
+      <div class="tiles two">
+        <div class="tile io">
+          <div><span class="label">A model wrote</span>
+<pre>"the quick brown fox"  →  "TQBF"
+"hello big world"      →  "HBW"
+"plain words here"     →  "PWH"</pre></div>
+          <div><span class="label">PLUMB shipped</span>
+<pre class="out">def f(s):
+<span class="cont">    return ''.join(([w[0] for w in ((s.upper()).split()) if w]))</span></pre></div>
+        </div>
+        <div class="tile io">
+          <div><span class="label">A model wrote</span>
+<pre>[3, 1, 2]  →  3</pre></div>
+          <div><span class="label">PLUMB shipped</span><span class="silent">nothing</span></div>
+          <p class="why">The length, the largest number and the first number all fit. One example can't tell them apart.</p>
+        </div>
+      </div>
+      <p class="caption">Real output from PLUMB 0.2.0.</p>
+    </div>
+
+    <div class="score">
+      <span class="big"><a href="https://doi.org/10.5281/zenodo.23937716" aria-label="90,355, see the paper"><span data-lock>90,355</span></a></span>
+      <p class="big-note"><b>new labels from 95 programs, with 0 errors against their own programs.</b> All 95 reproduced the examples Claude Opus 5.5 wrote for them.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>86 to 56</b><p>against Opus 5.5 on 100 fresh machine-made tasks, right minus wrong.</p></div>
+      <div class="stat"><b>$27 vs $1,606</b><p>per million labels at 1,000 labels per task, against Opus writing every label.</p></div>
+    </div>
+    <p class="limit"><b>What it can't do yet.</b> On rules written by people, Opus got all 50 right and PLUMB answered half.</p>
+    <p class="more"><a href="https://doi.org/10.5281/zenodo.23937716">Read the paper ›</a><a href="https://devkancheti4-design.github.io/plumb-site/">Product page ›</a></p>
+  </div>
+</section>
+
+<section class="ch" id="am">
+  <div class="wrap">
+    <p class="eyebrow">AM Math 3D</p>
+    <h2 class="head">Plan the shot as math. <span class="dim">The video model paints it.</span></h2>
+    <p class="lede">AM, a core reasoner, turns a video into <b>exact 3D numbers</b> and locks the shot you ask for before anything is generated. Every painted frame is then measured against the lock.</p>
+
+    <div class="exhibit">
+      <div class="pair" id="am-pair">
+        <figure>
+          <video controls muted loop playsinline preload="none" poster="media/chess_label_guide_last.jpg" aria-label="The locked plan: the pawn's place and size at every frame, drawn over the chessboard">
+            <source src="media/chess_label_guide.mp4" type="video/mp4">
+          </video>
+          <figcaption><b>The locked plan.</b> The pawn's place and size at every frame, sealed before generation.</figcaption>
+        </figure>
+        <figure>
+          <video controls muted loop playsinline preload="none" poster="media/chess_label_kling_last.jpg" aria-label="What Kling 4.0 Edit painted, with its distance from the plan shown at every frame">
+            <source src="media/chess_label_kling.mp4" type="video/mp4">
+          </video>
+          <figcaption><b>What Kling 4.0 Edit painted.</b> One take, with its distance from the plan at every frame.</figcaption>
+        </figure>
+      </div>
+      <button class="toggle" id="am-toggle" type="button" hidden>Pause</button>
+    </div>
+
+    <div class="score">
+      <span class="big"><a href="https://github.com/devkancheti4-design/am-math3d/tree/main/results/chess_test" aria-label="1.7 pixels, see the proof"><span data-lock>1.7</span><small>px</small></a></span>
+      <p class="big-note"><b>median gap from the locked plan,</b> worst 3.4 px over 73 frames. The whole shot cost about $1.05. AM's own part took 166 s on a laptop and 0 tokens.</p>
+    </div>
+
+    <div class="exhibit">
+      <p class="bars-title">A mouse jump: distance from the planned landing spot</p>
+      <div class="bars" role="img" aria-label="Guided repaint 3 pixels, Veo given the plan's end frame 4 pixels and one second late, Veo with tuned words 53 pixels, Veo with normal words 201 pixels, Veo with the numbers as text 221 pixels">
+        <div class="bar-row me"><span>The guide, repainted by FLUX 3 Edit. One take.</span><b>3 px</b><div class="track"><i style="--v:1.4%"></i></div></div>
+        <div class="bar-row"><span>Veo, given the plan's end frame. 1 s late.</span><b>4 px</b><div class="track"><i style="--v:1.8%"></i></div></div>
+        <div class="bar-row"><span>Veo, tuned words</span><b>53 px</b><div class="track"><i style="--v:24%"></i></div></div>
+        <div class="bar-row"><span>Veo, normal words</span><b>201 px</b><div class="track"><i style="--v:91%"></i></div></div>
+        <div class="bar-row"><span>Veo, the numbers as text</span><b>221 px</b><div class="track"><i style="--v:100%"></i></div></div>
+      </div>
+    </div>
+
+    <p class="limit"><b>What it can't do yet.</b> A 15-second ad failed: the model returned 4 seconds and ran about twice as fast. On the mouse, AM's core answered CANNOT on the clip's motion, so the jump's math was written by hand from its measurements.</p>
+    <p class="more"><a href="https://doi.org/10.5281/zenodo.23937763">Read the paper ›</a><a href="https://devkancheti4-design.github.io/am-math3d/">Website ›</a><a href="https://github.com/devkancheti4-design/am-math3d">Code ›</a></p>
+  </div>
+</section>
+
+<section class="ch" id="detect-law">
+  <div class="wrap">
+    <p class="eyebrow">Detect Law</p>
+    <h2 class="head">Spots AI writing. <span class="dim">Without ever training on it.</span></h2>
+    <p class="lede">It reads two small open models and decides with <b>integer arithmetic</b>, offline on a laptop. RAID's own bot scored it on 672,000 hidden texts.</p>
+    <div class="score">
+      <span class="big"><a href="https://raid-bench.xyz/leaderboard" aria-label="92.33 percent, see the leaderboard"><span data-lock>92.33</span><small>%</small></a></span>
+      <p class="big-note"><b>of AI text caught at 5% false positives,</b> on the largest AI-text detection benchmark.</p>
+    </div>
+    <div class="exhibit">
+      <div class="bars" role="img" aria-label="Detect Law, zero-shot, 92.33 percent. Binoculars, zero-shot, 79.0 percent. Best detector trained on AI text, about 100 percent.">
+        <div class="bar-row me"><span>Detect Law, zero-shot</span><b>92.33%</b><div class="track"><i style="--v:92.33%"></i></div></div>
+        <div class="bar-row"><span>Binoculars, zero-shot</span><b>79.0%</b><div class="track"><i style="--v:79%"></i></div></div>
+        <div class="bar-row"><span>Best detector trained on AI text</span><b>about 100%</b><div class="track"><i style="--v:100%"></i></div></div>
+      </div>
+    </div>
+    <p class="limit"><b>What it can't do yet.</b> As far as I can find, this is the highest zero-shot score on the board, but detectors trained on AI text still rank above it.</p>
+    <p class="more"><a href="https://doi.org/10.5281/zenodo.23257822">Read the paper ›</a><a href="https://devkancheti4-design.github.io/detect-law/">Website ›</a><a href="https://github.com/liamdugan/raid/pull/216">RAID submission ›</a></p>
+  </div>
+</section>
+
+<section class="ch" id="model-d">
+  <div class="wrap">
+    <p class="eyebrow">Model D</p>
+    <h2 class="head">AI on your codebase. <span class="dim">A bill that flattens.</span></h2>
+    <p class="lede">It keeps what a coding agent learns about a codebase <b>on disk</b> and tells it where to look in every new session.</p>
+    <div class="score">
+      <span class="big"><a href="https://github.com/devkancheti4-design/optimal-context-mapping/blob/main/evidence/team-year/RESULTS_TEAM_YEAR.md" aria-label="2.09 times cheaper, see the results"><span data-lock>2.09</span><small>×</small></a></span>
+      <p class="big-note"><b>cheaper over Django's 288 fixes from 2022,</b> at the same accuracy: $12.32 against $25.72, with 252 vs 253 right.</p>
+    </div>
+    <div class="exhibit">
+      <p class="bars-title">Cost per fix, replaying Django's 2022 in order</p>
+      <div class="chart" role="img" aria-label="Agent alone: 6.1, 8.3, 11.2 and 10.5 cents per fix across the four quarters of 2022. With Model D: 3.2, 4.9, 5.0 and 4.1 cents per fix.">
+        <svg class="large" viewBox="0 0 640 322" aria-hidden="true">
+          <line class="grid" x1="44" x2="640" y1="24" y2="24"/><line class="grid" x1="44" x2="640" y1="109.3" y2="109.3"/><line class="grid" x1="44" x2="640" y1="194.7" y2="194.7"/><line class="grid" x1="44" x2="640" y1="280" y2="280"/>
+          <text x="0" y="28">$0.12</text><text x="0" y="113">$0.08</text><text x="0" y="199">$0.04</text><text x="0" y="284">$0</text>
+          <text x="64" y="306" text-anchor="middle">Q1</text><text x="214" y="306" text-anchor="middle">Q2</text><text x="364" y="306" text-anchor="middle">Q3</text><text x="514" y="306" text-anchor="middle">Q4</text>
+          <path class="series s-alone" pathLength="1" d="M64 149.9 214 102.9 364 41.1 514 56"/>
+          <path class="series s-me" pathLength="1" d="M64 211.7 214 175.5 364 173.3 514 192.5"/>
+          <g class="dot-alone">
+            <circle cx="64" cy="149.9" r="5"><title>Q1 2022, agent alone: $0.061 per fix</title></circle>
+            <circle cx="214" cy="102.9" r="5"><title>Q2 2022, agent alone: $0.083 per fix</title></circle>
+            <circle cx="364" cy="41.1" r="5"><title>Q3 2022, agent alone: $0.112 per fix</title></circle>
+            <circle cx="514" cy="56" r="5"><title>Q4 2022, agent alone: $0.105 per fix</title></circle>
+          </g>
+          <g class="dot-me">
+            <circle cx="64" cy="211.7" r="5"><title>Q1 2022, with Model D: $0.032 per fix</title></circle>
+            <circle cx="214" cy="175.5" r="5"><title>Q2 2022, with Model D: $0.049 per fix</title></circle>
+            <circle cx="364" cy="173.3" r="5"><title>Q3 2022, with Model D: $0.050 per fix</title></circle>
+            <circle cx="514" cy="192.5" r="5"><title>Q4 2022, with Model D: $0.041 per fix</title></circle>
+          </g>
+          <text class="end" x="530" y="52">Agent alone</text><text class="end" x="530" y="70">$0.105</text>
+          <text class="end lab-me" x="530" y="188">With Model D</text><text class="end lab-me" x="530" y="206">$0.041</text>
+        </svg>
+        <svg class="small" viewBox="0 0 340 226" aria-hidden="true">
+          <line class="grid" x1="0" x2="340" y1="24" y2="24"/><line class="grid" x1="0" x2="340" y1="82.7" y2="82.7"/><line class="grid" x1="0" x2="340" y1="141.3" y2="141.3"/><line class="grid" x1="0" x2="340" y1="200" y2="200"/>
+          <text x="0" y="19">$0.12</text><text x="0" y="77.7">$0.08</text><text x="0" y="136.3">$0.04</text><text x="0" y="195">$0</text>
+          <text x="14" y="220" text-anchor="middle">Q1</text><text x="85" y="220" text-anchor="middle">Q2</text><text x="156" y="220" text-anchor="middle">Q3</text><text x="228" y="220" text-anchor="middle">Q4</text>
+          <path class="series s-alone" pathLength="1" d="M14 110.5 85 78.3 156 35.7 228 46"/>
+          <path class="series s-me" pathLength="1" d="M14 153.1 85 128.1 156 126.7 228 139.9"/>
+          <g class="dot-alone"><circle cx="14" cy="110.5" r="4"/><circle cx="85" cy="78.3" r="4"/><circle cx="156" cy="35.7" r="4"/><circle cx="228" cy="46" r="4"/></g>
+          <g class="dot-me"><circle cx="14" cy="153.1" r="4"/><circle cx="85" cy="128.1" r="4"/><circle cx="156" cy="126.7" r="4"/><circle cx="228" cy="139.9" r="4"/></g>
+          <text class="end" x="238" y="44">Agent alone</text><text class="end" x="238" y="60">$0.105</text>
+          <text class="end lab-me" x="238" y="136">With Model D</text><text class="end lab-me" x="238" y="152">$0.041</text>
+        </svg>
+      </div>
+    </div>
+    <p class="limit"><b>What it can't do yet.</b> An outside agent's tests on unseen codebases ranked it first but measured a smaller gain, 1.58× fewer tool calls.</p>
+    <p class="more"><a href="https://optimal-context-mapping-site.vercel.app/">Website ›</a><a href="https://github.com/devkancheti4-design/optimal-context-mapping">Code ›</a><a href="https://optimal-context-mapping-site.vercel.app/independent/">Outside test ›</a></p>
+  </div>
+</section>
+
+<section class="ch" id="face-law">
+  <div class="wrap">
+    <p class="eyebrow">Face Law</p>
+    <h2 class="head">Recognises a face. <span class="dim">With no neural network.</span></h2>
+    <p class="lede">Counted <b>integer tables</b> replace a trained network. No GPU, and no training beyond counting.</p>
+    <div class="score">
+      <span class="big"><a href="https://github.com/devkancheti4-design/facelaw-/blob/main/nist_submission/SUBMISSION.md" aria-label="86.5 percent, see the test"><span data-lock>86.5</span><small>%</small></a></span>
+      <p class="big-note"><b>of owners accepted at 1 stranger in 1,000,</b> in a NIST-style test on Extended Yale B. The best classic method reached 84.0%.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>33 KB</b><p>The whole model.</p></div>
+      <div class="stat"><b>12.5 µs</b><p>Fastest comparison, up to 19 µs.</p></div>
+      <div class="stat"><b>1 core</b><p>One CPU core, integer look-ups only.</p></div>
+      <div class="stat"><b>124/124</b><p>Comparisons passed NIST's own test driver.</p></div>
+    </div>
+    <p class="limit"><b>What it can't do yet.</b> So far it is tested on lab faces only, the NIST entry is not submitted yet, and a photo of the owner can still open the phone unlock.</p>
+    <p class="more"><a href="https://github.com/devkancheti4-design/facelaw-/blob/main/paper/face_law_v2_paper.pdf">Read the paper ›</a><a href="https://github.com/devkancheti4-design/facelaw-/blob/main/LAWS.md">The six laws ›</a><a href="https://devkancheti4-design.github.io/facelawlabs/">Face Law Labs ›</a></p>
+  </div>
+</section>
+
+<section class="ch" style="padding-top:0">
+  <div class="wrap">
+    <div class="tiles two">
+      <article class="tile">
+        <h3>neo4d</h3>
+        <span class="star"><a href="https://doi.org/10.5281/zenodo.23582871" style="color:inherit">62.5%</a></span>
+        <p class="body"><b>of 176 bugs fixed by a small model, against 30.7% alone.</b> A model-free engine that sits beside a language model, mutates its code token by token and lets the tests judge every variant. It did nothing for problems a strong model already solves.</p>
+        <p class="more"><a href="https://doi.org/10.5281/zenodo.23582871">Read the paper ›</a><a href="https://github.com/devkancheti4-design/neo4d">Code ›</a></p>
+      </article>
+      <article class="tile">
+        <h3>AM harness</h3>
+        <span class="star"><a href="https://github.com/devkancheti4-design/am/tree/master/results/coding" style="color:inherit">+8</a></span>
+        <p class="body"><b>contest problems on LiveCodeBench v6, none lost,</b> at about $0.20 per extra solve. It makes a model check and fix its own answers before they ship. On rule-finding questions it was 53 to 122× cheaper than Gemini alone, with more wrong answers, 8 vs 1 to 5.</p>
+        <p class="more"><a href="https://github.com/devkancheti4-design/am">Code ›</a></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<section class="ch" id="open-source">
+  <div class="wrap">
+    <p class="eyebrow">Open source</p>
+    <h2 class="head">My code ships inside tools <span class="dim">developers already use.</span></h2>
+    <div class="exhibit tiles two">
+      <article class="tile">
+        <h3>Graphify core</h3>
+        <span class="chip">Shipped in 0.9.87 and 0.9.88</span>
+        <span class="star">142k<small>GitHub stars</small></span>
+        <p class="body"><b>Four commits in its core query code,</b> credited in the release notes. Strongest matches now print first, which put the fix file in the top 5 on 63 of 114 real Django bugs, up from 53. <code>--seed</code> lets an outside ranker choose where a search starts. Three more changes are in review.</p>
+        <p class="more"><a href="https://github.com/Graphify-Labs/graphify/releases/tag/v0.9.87">0.9.87 notes ›</a><a href="https://github.com/Graphify-Labs/graphify/releases/tag/v0.9.88">0.9.88 notes ›</a><a href="https://github.com/Graphify-Labs/graphify/pull/4358">#4358 ›</a><a href="https://github.com/Graphify-Labs/graphify/pull/4289">#4289 ›</a></p>
+      </article>
+      <article class="tile">
+        <h3>claude-mem</h3>
+        <span class="chip">Merged, shipped in v13.36.0</span>
+        <span class="star">112k<small>GitHub stars</small></span>
+        <p class="body"><b>My fix to its search service made plain-English questions work.</b> On LOCOMO's 1,536 questions, recall@10 went from 0.001 to 0.534. A sync speed-up, 131 ms to 2.6 ms on a 3.9 MB page, is in review.</p>
+        <p class="more"><a href="https://github.com/thedotmack/claude-mem/pull/4697">#4697 ›</a><a href="https://github.com/thedotmack/claude-mem/releases/tag/v13.36.0">v13.36.0 notes ›</a><a href="https://github.com/thedotmack/claude-mem/pull/4937">#4937 in review ›</a></p>
+      </article>
+      <article class="tile wide">
+        <h3>RAID</h3>
+        <span class="chip">On the leaderboard</span>
+        <p class="body" style="max-width:44rem"><b>Two Detect Law versions are on the leaderboard</b> of the ACL 2024 benchmark. I also proposed tags that disclose whether a detector trained on RAID's data, now in review.</p>
+        <p class="more"><a href="https://github.com/liamdugan/raid/pull/212">#212 ›</a><a href="https://github.com/liamdugan/raid/pull/216">#216 ›</a><a href="https://github.com/liamdugan/raid/pull/221">#221 in review ›</a></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sheet" id="papers">
+  <div class="wrap">
+    <h2 class="head">Papers</h2>
+    <p class="all"><a href="https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Kancheti%2C%20Devieswar%22">All on Zenodo ›</a></p>
+    <div class="papers">
+      <div class="paper"><time datetime="2026-11-04">4 Nov 2026</time><div><a href="https://doi.org/10.5281/zenodo.23937716">Silent Unless Exact: Clean Synthetic Training Data from Any Model's Examples</a><p>10.5281/zenodo.23937716</p></div></div>
+      <div class="paper"><time datetime="2026-11-04">4 Nov 2026</time><div><a href="https://doi.org/10.5281/zenodo.23937763">Numbers Before Pixels: Locking a Video Shot as Exact 3D Math Before It Is Generated</a><p>10.5281/zenodo.23937763</p></div></div>
+      <div class="paper"><time datetime="2026-11-01">1 Nov 2026</time><div><a href="https://doi.org/10.5281/zenodo.23861718">Graphify maps the code. Model D says where to start.</a><p>With Folarera Ayobami Kassim. 10.5281/zenodo.23861718</p></div></div>
+      <div class="paper"><time datetime="2026-10-28">28 Oct 2026</time><div><a href="https://github.com/devkancheti4-design/facelaw-/blob/main/paper/face_law_v2_paper.pdf">Face Law v2: counted integer laws for light-robust face verification on low-end hardware</a><p>Preprint on GitHub</p></div></div>
+      <div class="paper"><time datetime="2026-10-23">23 Oct 2026</time><div><a href="https://doi.org/10.5281/zenodo.23582871">Guess Close, Search Exact: A Formally Verified, Model-Free Memory and Mutation Engine for Language-Model Agents</a><p>10.5281/zenodo.23582871</p></div></div>
+      <div class="paper"><time datetime="2026-10-11">11 Oct 2026</time><div><a href="https://doi.org/10.5281/zenodo.23289068">Optimal Context Mapping (Model D): a shared, learning retrieval layer for AI coding agents</a><p>Software record. 10.5281/zenodo.23289068</p></div></div>
+      <div class="paper"><time datetime="2026-10-09">9 Oct 2026</time><div><a href="https://doi.org/10.5281/zenodo.23257822">The Detect Law: Zero-Shot Detection of Machine-Generated Text with an Integer-Exact, Heterogeneity-Aware Sequential Test</a><p>10.5281/zenodo.23257822</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="also">
+  <div class="wrap">
+    <h2 class="head">Also built.</h2>
+    <div class="cards">
+      <a class="card" href="https://devkancheti4-design.github.io/bytebook/"><b>Bytebook</b><span>A free interactive CS ebook for Kalvium students, semesters 1 to 3.</span></a>
+      <a class="card" href="https://devkancheti4-design.github.io/build-your-own-ide/"><b>Bitlens</b><span>Build a language, compiler and pausable VM from scratch, then step through them in the browser.</span></a>
+      <a class="card" href="https://devkancheti4-design.github.io/cursorfx/"><b>cursorfx</b><span>Custom cursors, trails and click effects for any website, from one script tag.</span></a>
+      <a class="card" href="https://cupboard-cad-studio.netlify.app"><b>Cupboard CAD</b><span>Design furniture in 3D in the browser and get the factory cutting list, CNC drilling and a quote.</span></a>
+      <a class="card" href="https://devkancheti4-design.github.io/neo-cad/"><b>Neo CAD</b><span>Design rooms of modular furniture and show them to a customer before anything is built.</span></a>
+      <a class="card" href="https://github.com/devkancheti4-design/kiln"><b>Kiln</b><span>An offline website maker with 487,710,720 real sites to start from.</span></a>
+      <a class="card" href="https://matter-lab.netlify.app"><b>Matter Lab</b><span>Chemistry you can poke at, from a real object down six rungs of scale.</span></a>
+      <a class="card" href="https://devkancheti4-design.github.io/magic-pencil-site/"><b>Magic Pencil</b><span>A free browser game where whatever you draw comes alive.</span></a>
+      <a class="card" href="https://devkancheti4-design.github.io/menagerie/"><b>Menagerie</b><span>A chat UI for local and hosted language models where a pixel animal does the typing.</span></a>
+      <a class="card" href="https://github.com/devkancheti4-design/buggy"><b>buggy</b><span>Finds the line to open and the commit that broke your tests, with no model.</span></a>
+      <a class="card" href="https://github.com/devkancheti4-design/ship"><b>ship</b><span>One word, one safely pushed commit.</span></a>
+      <a class="card" href="https://github.com/devkancheti4-design"><b>Everything else</b><span>The rest of my public work on GitHub.</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="end-note" id="contact">
+  <div class="wrap">
+    <h2 class="head">Get in touch.</h2>
+    <a class="mail" href="mailto:devkancheti4@gmail.com">devkancheti4@gmail.com</a>
+    <p class="elsewhere"><a href="https://github.com/devkancheti4-design">GitHub ›</a><a href="https://www.linkedin.com/in/devieswar-kancheti">LinkedIn ›</a><a href="https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Kancheti%2C%20Devieswar%22">Zenodo ›</a></p>
+    <p class="motto">A plumb line is true, or it is not used.</p>
+    <p class="fine">© 2026 Devieswar Kancheti. No trackers, no cookies. Updated 4 November 2026.</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const motion = root.classList.contains("motion");
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
+  /* The plumb line is a real pendulum. 10 px stands for 1 cm, so g = 981 cm/s² is 9810 px/s². */
+  const line = $("#pl-line"), bob = $("#pl-bob"), tag = $("#pl-tag");
+  const G = 9810, born = performance.now(), fine = matchMedia("(pointer: fine)").matches;
+  let W, H, D, th = motion ? .13 : 0, om = 0, drag = false, px = null, vx = 0, Lp = 0, raf = 0, last = 0, rest = !motion, tm = 0, yLast = scrollY;
+
+  function measure() { W = innerWidth; H = innerHeight; D = root.scrollHeight; }
+
+  function place() {
+    const y = scrollY, k = clamp(y / (H * .75), 0, 1), e = k * k * (3 - 2 * k);
+    const edge = W - clamp((W - 1248) / 4 + 14, 14, 44);
+    const stage = W >= 900 ? W * .84 : edge;
+    const age = motion ? clamp((performance.now() - born) / 1200, 0, 1) : 1;
+    const drop = 1 - Math.pow(1 - age, 3);
+    const run = clamp(y / Math.max(1, D - H), 0, 1);
+    return { x: stage + (edge - stage) * e, L: Math.max(2, H * (.56 + .34 * run) * drop), s: W >= 900 ? 1.35 - .55 * e : .62, hero: y < H * .45, falling: age < 1 };
+  }
+
+  function paint(p) {
+    const bx = p.x + p.L * Math.sin(th), by = p.L * Math.cos(th);
+    line.style.transform = `translate(${p.x}px,0) rotate(${-th}rad) scaleY(${p.L})`;
+    bob.style.transform = `translate(${bx - 12}px,${by}px) rotate(${-th}rad) scale(${p.s})`;
+    tag.style.transform = `translate(${bx - 186}px,${by + 22 * p.s}px)`;
+    const deg = Math.abs(th) * 180 / Math.PI;
+    tag.textContent = rest ? (fine && motion ? "0.00°, true. Pull it." : "0.00°, true") : deg.toFixed(2) + "°";
+    tag.classList.toggle("show", drag || (p.hero && W >= 900));
+  }
+
+  function frame(t) {
+    raf = 0;
+    const dt = clamp((t - last) / 1000, 1 / 240, 1 / 30); last = t;
+    const p = place();
+    if (!motion) { paint(p); return; }
+    if (px === null) { px = p.x; Lp = p.L; }
+    const v = (p.x - px) / dt, ax = clamp((v - vx) / dt, -12000, 12000), Ld = clamp((p.L - Lp) / dt, -2000, 2000);
+    vx = v; px = p.x; Lp = p.L;
+    if (!drag) {
+      const L = Math.max(p.L, 200);
+      /* damping grows as the swing dies, so the line really does come to rest */
+      const c = .9 + 1.7 * Math.exp(-Math.abs(th) * 40 - Math.abs(om) * 4);
+      const a = -(G / L) * Math.sin(th) - (ax / L) * Math.cos(th) - 2 * (Ld / L) * om - c * om;
+      om += a * dt; th += om * dt;
+      rest = Math.abs(th) < .00008 && Math.abs(om) < .001 && Math.abs(ax) < 1 && !p.falling;
+      if (rest) { th = 0; om = 0; }
+    } else rest = false;
+    paint(p);
+    if (!rest || drag) raf = requestAnimationFrame(frame);
+  }
+  function wake() { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+
+  if (motion) {
+    bob.addEventListener("pointerdown", e => { drag = true; tm = performance.now(); bob.setPointerCapture(e.pointerId); bob.classList.add("held"); om = 0; wake(); e.preventDefault(); });
+    bob.addEventListener("pointermove", e => {
+      if (!drag) return;
+      const p = place(), n = clamp(Math.atan2(e.clientX - p.x, Math.max(30, e.clientY)), -1.05, 1.05), now = performance.now();
+      om = clamp((n - th) / Math.max(.008, (now - tm) / 1000), -6, 6); tm = now; th = n; wake();
+    });
+    const release = () => { if (drag) { drag = false; bob.classList.remove("held"); wake(); } };
+    bob.addEventListener("pointerup", release);
+    bob.addEventListener("pointercancel", release);
+  }
+
+  /* The case: words light up as you read down the page. */
+  const para = $("#case"); let words = [], lit = -1;
+  if (motion && para) {
+    (function walk(n) {
+      [...n.childNodes].forEach(c => {
+        if (c.nodeType === 3) {
+          const f = document.createDocumentFragment();
+          c.textContent.split(/(\s+)/).forEach(t => {
+            if (!t) return;
+            if (/^\s+$/.test(t)) { f.append(t); return; }
+            const s = document.createElement("span"); s.className = "w"; s.textContent = t; f.append(s); words.push(s);
+          });
+          c.replaceWith(f);
+        } else walk(c);
+      });
+    })(para);
+  }
+  function light() {
+    if (!words.length) return;
+    const r = para.getBoundingClientRect(), from = H * .86, span = r.height + H * .42;
+    const n = Math.round(clamp((from - r.top) / span, 0, 1) * words.length);
+    if (n === lit) return; lit = n;
+    words.forEach((w, i) => w.classList.toggle("on", i < n));
+  }
+
+  /* Numbers run, then lock digit by digit. */
+  function lock(el) {
+    const final = el.textContent, chars = [...final], ix = chars.flatMap((c, i) => /\d/.test(c) ? [i] : []);
+    el.style.display = "inline-block"; el.style.minWidth = el.offsetWidth + "px";
+    let f = 0;
+    (function tick() {
+      f++;
+      const set = Math.floor(f / 3), out = chars.slice();
+      ix.forEach((i, n) => { if (n >= set) out[i] = String(Math.floor(Math.random() * 10)); });
+      el.textContent = out.join("");
+      if (set < ix.length) requestAnimationFrame(tick); else { el.textContent = final; el.style.minWidth = ""; }
+    })();
+  }
+  if (motion) {
+    const once = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      once.unobserve(e.target);
+      e.target.classList.add("in");
+      if (e.target.matches("[data-lock]")) lock(e.target);
+    }), { threshold: .3 });
+    $$(".bars, .chart, [data-lock]").forEach(n => once.observe(n));
+  }
+
+  /* The two videos play only while you can see them. */
+  const pair = $("#am-pair"), vids = $$("video", pair), toggle = $("#am-toggle");
+  if (motion) {
+    let held = false;
+    vids.forEach(v => { v.controls = false; });
+    new IntersectionObserver(([e]) => vids.forEach(v => { if (e.isIntersecting && !held) v.play().catch(() => {}); else v.pause(); }), { threshold: .25 }).observe(pair);
+    toggle.hidden = false;
+    toggle.addEventListener("click", () => { held = !held; toggle.textContent = held ? "Play" : "Pause"; vids.forEach(v => { if (held) v.pause(); else v.play().catch(() => {}); }); });
+  }
+
+  addEventListener("scroll", () => {
+    const y = scrollY, dy = y - yLast; yLast = y;
+    if (motion && !drag) om += clamp(dy * .00005, -.02, .02) * (W >= 900 ? 1 : .35);
+    rest = false; wake(); light();
+  }, { passive: true });
+  addEventListener("resize", () => { measure(); rest = false; wake(); light(); });
+  addEventListener("load", () => { measure(); wake(); });
+  measure(); wake(); light();
+})();
+</script>
+</body>
+</html>
