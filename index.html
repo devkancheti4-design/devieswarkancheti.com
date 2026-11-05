@@ -30,7 +30,7 @@
   "affiliation": { "@type": "CollegeOrUniversity", "name": "SRM University AP" },
   "sameAs": [
     "https://github.com/devkancheti4-design",
-    "https://www.linkedin.com/in/devieswar-kancheti"
+    "https://www.linkedin.com/in/devieswar-kancheti-267016391/"
   ]
 }
 </script>
@@ -127,7 +127,12 @@ h1 span { display: block; }
 .thesis { margin-top: clamp(1.25rem, 3vw, 2.25rem); font: 600 clamp(1.625rem, 4.1vw, 3.5rem)/1.08 var(--display); letter-spacing: -.026em; }
 .who { margin-top: 1.1rem; max-width: 39rem; color: var(--dim); font-size: clamp(1rem, 1.4vw, 1.1875rem); }
 .who a { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .16em; }
-.motion .hero h1 span, .motion .thesis, .motion .who { animation: rise 1s var(--ease) both; }
+.google-me { display: flex; align-items: center; gap: .6rem; width: fit-content; max-width: 100%; margin-bottom: clamp(1.25rem, 2.6vw, 2rem); padding: .4rem .4rem .4rem .95rem; border-radius: 99rem; background: var(--tile-up); color: var(--ink); font-size: clamp(.875rem, 1.2vw, 1rem); line-height: 1.25; transition: background .25s; }
+.google-me:hover { background: var(--track); text-decoration: none; }
+.google-me svg { flex: none; color: var(--dim); }
+.google-me .q { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.google-me .go { flex: none; padding: .35rem .85rem; border-radius: 99rem; background: var(--ink); color: #000; font-weight: 600; }
+.motion .google-me, .motion .hero h1 span, .motion .thesis, .motion .who { animation: rise 1s var(--ease) both; }
 .motion .hero h1 span + span { animation-delay: .08s; }
 .motion .thesis { animation-delay: .24s; }
 .motion .who { animation-delay: .38s; }
@@ -267,6 +272,11 @@ h1 span { display: block; }
   .chart .large { display: none; }
   .chart .small { display: block; }
 }
+@media (max-width: 22rem) {
+  .google-me { padding-left: .8rem; font-size: .8125rem; }
+  .google-me svg { display: none; }
+  .google-me .go { padding-inline: .6rem; }
+}
 @supports (animation-timeline: view()) {
   .motion .big { animation: zoom linear both; animation-timeline: view(); animation-range: entry 0% cover 38%; transform-origin: left center; }
   @keyframes zoom { from { opacity: .2; transform: scale(.84); } to { opacity: 1; transform: none; } }
@@ -309,6 +319,11 @@ h1 span { display: block; }
 
 <header class="hero">
   <div class="wrap">
+    <a class="google-me" href="https://www.google.com/search?udm=50&amp;q=Devieswar+Kancheti" aria-label="Google me: ask Google AI Mode about Devieswar Kancheti">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="M10.5 10.5 14 14"/></svg>
+      <span class="q">Devieswar Kancheti</span>
+      <span class="go">Google me ›</span>
+    </a>
     <h1><span>Devieswar</span><span>Kancheti</span></h1>
     <p class="thesis">I build AI tools. <span class="dim">Then I prove them.</span></p>
     <p class="who">B.Tech CSE at SRM University AP, class of 2029. Founder of Model D and Face Law Labs. Contributor to <a href="#open-source">Graphify's core and claude-mem</a>.</p>
@@ -604,9 +619,9 @@ h1 span { display: block; }
   <div class="wrap">
     <h2 class="head">Get in touch.</h2>
     <a class="mail" href="mailto:devkancheti4@gmail.com">devkancheti4@gmail.com</a>
-    <p class="elsewhere"><a href="https://github.com/devkancheti4-design">GitHub ›</a><a href="https://www.linkedin.com/in/devieswar-kancheti">LinkedIn ›</a><a href="https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Kancheti%2C%20Devieswar%22">Zenodo ›</a></p>
+    <p class="elsewhere"><a href="https://github.com/devkancheti4-design">GitHub ›</a><a href="https://www.linkedin.com/in/devieswar-kancheti-267016391/">LinkedIn ›</a><a href="https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Kancheti%2C%20Devieswar%22">Zenodo ›</a></p>
     <p class="motto">A plumb line is true, or it is not used.</p>
-    <p class="fine">© 2026 Devieswar Kancheti. No trackers, no cookies. Updated 4 November 2026.</p>
+    <p class="fine">© 2026 Devieswar Kancheti. No trackers, no cookies. Updated 5 November 2026.</p>
   </div>
 </footer>
 
